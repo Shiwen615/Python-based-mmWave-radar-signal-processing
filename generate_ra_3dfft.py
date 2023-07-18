@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from config.get_params_value import GetParamsValue
 from modules.fft.test import *
 from utils.Normalize import Normalize
+from modules.plot.plot_rangeAng import plot_rangeAng
 
 params = GetParamsValue()
 
@@ -78,15 +79,17 @@ Angdata = fft_angle(Rangedata_merge,fft_Ang,Is_Windowed)
 Angdata_crop = Angdata[num_crop:fft_Rang - num_crop, :, :]
 Angdata_crop = Normalize(Angdata_crop, max_value)
 
-Xpow = np.abs(Angdata_crop)
-Xpow = np.squeeze(np.sum(Xpow, axis=2) / Xpow.shape[2])
+# Xpow = np.abs(Angdata_crop)
+# Xpow = np.squeeze(np.sum(Xpow, axis=2) / Xpow.shape[2])
 
-Xsnr = Xpow
+# Xsnr = Xpow
 
-fig = plt.figure(frameon=False)
-ax = plt.Axes(fig, [0., 0., 1., 1.])
-ax.set_axis_off()
-fig.add_axes(ax)
-ax.imshow(Xsnr[::-1], aspect='auto')
-plt.savefig('RF_image.png')
-plt.close(fig)
+# fig = plt.figure(frameon=False)
+# ax = plt.Axes(fig, [0., 0., 1., 1.])
+# ax.set_axis_off()
+# fig.add_axes(ax)
+# ax.imshow(Xsnr[::-1], aspect='auto')
+# plt.savefig('RF_image.png')
+# plt.close(fig)
+
+plot_rangeAng(Angdata_crop,rng_grid[num_crop:fft_Rang-num_crop],agl_grid)
