@@ -1,4 +1,6 @@
 import numpy as np
+from utils.matlab_hanning import hanning
+
 def fft_doppler(Xcube, fft_Vel, Is_Windowed):
     # Nr = Xcube.shape[0]  # length of Chirp
     # Ne = Xcube.shape[1]  # number of receiver
@@ -17,7 +19,7 @@ def fft_doppler(Xcube, fft_Vel, Is_Windowed):
     #         DopData[j, i, :] = np.fft.fftshift(np.fft.fft(win_dop, fft_Vel))
     # parallel
     if Is_Windowed:
-        win_dop = Xcube * np.reshape(np.hanning(Nd), (1,1,-1))
+        win_dop = Xcube * np.reshape(hanning(Nd), (1,1,-1))
     else:
         win_dop = Xcube
     DopData = np.fft.fftshift(np.fft.fft(win_dop, fft_Vel, axis=2), axes=2)
