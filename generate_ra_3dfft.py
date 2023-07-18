@@ -72,7 +72,7 @@ Rangedata_even = fft_range(chirp_even,fft_Rang,Is_Windowed)
 # Dopplerdata_even = fft_doppler(Rangedata_even, fft_Vel, False)
 # Dopdata_sum = np.squeeze(np.mean(np.abs(Dopplerdata_odd), axis=1))
 
-Rangedata_merge = np.concatenate((Rangedata_odd, Rangedata_even), axis=2)
+Rangedata_merge = np.concatenate((Rangedata_odd, Rangedata_even), axis=1)
 # Angle FFt
 Angdata = fft_angle(Rangedata_merge,fft_Ang,Is_Windowed)
 Angdata_crop = Angdata[num_crop:fft_Rang - num_crop, :, :]
